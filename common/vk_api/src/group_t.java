@@ -51,6 +51,45 @@ public class group_t extends vk_api_t {
     }
 
     /**
+     * Parse group subscribers by group id with filter
+     * @param group_id - group id
+     * @return
+     * @throws Exception
+     */
+    public static ArrayList<String> get_subscribers( String group_id, filter_t filter ) {
+        int members_cnt = get_group_members_cnt(group_id);
+
+        int max_groups_per_request = 200;
+
+        ArrayList<String> res = new ArrayList<String>();
+
+        if (members_cnt <= max_groups_per_request){
+            try{
+                res.addAll(group_members_request(group_id, 0, members_cnt));
+            } catch (Exception err){
+                System.err.println("Some error: " + err);
+            }
+
+            return res;
+        }
+
+        boolean need_incomplete_request = (members_cnt % max_groups_per_request) > 0;
+
+        int request_cnt = members_cnt / max_groups_per_request + (need_incomplete_request ? 1 : 0);
+
+        for (int i = 0; i < request_cnt - 1; ++i)
+            res.addAll(group_members_request(group_id, i * max_groups_per_request, (i + 1) * max_groups_per_request));
+
+        if (!need_incomplete_request){
+            return res;
+        }
+
+        res.addAll(group_members_request(group_id, request_cnt * max_groups_per_request, members_cnt));
+
+        return res;
+    }
+
+    /**
      * Parse subscribers from a list of groups
      * @param groups_ids - List<String> of groups id's
      * @return Map<String, Integer> - frequency map of groups subscribers
@@ -90,7 +129,7 @@ public class group_t extends vk_api_t {
 
         int max_groups_per_request = 200;
 
-        List<String> res = new ArrayList<String>();
+        List<String> res = new ArrayList<>();
 
         if (members_cnt <= max_groups_per_request){
             try{

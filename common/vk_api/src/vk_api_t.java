@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * Created by anton on 20.09.16.
  */
 public class vk_api_t {
-    public static String call_method( String method, String ... params ) throws Exception {
+    public static String call_method( String method, String ... params ){
         String request = "https://api.vk.com/method/" + method + "?";
 
         for (int i = 0; i < params.length; ++i)
@@ -25,19 +25,27 @@ public class vk_api_t {
 
         request += "v=5.53";
 
-        URLConnection connection = new URL(request).openConnection();
+        StringBuilder sb = null;
 
-        InputStream is = connection.getInputStream();
-        InputStreamReader reader = new InputStreamReader(is);
-        char[] buffer = new char[256];
-        int rc;
+        URLConnection connection = null;
 
-        StringBuilder sb = new StringBuilder();
+        try {
+            connection = new URL(request).openConnection();
 
-        while ((rc = reader.read(buffer)) != -1)
-            sb.append(buffer, 0, rc);
+            InputStream is = connection.getInputStream();
+            InputStreamReader reader = new InputStreamReader(is);
+            char[] buffer = new char[256];
+            int rc;
 
-        reader.close();
+            sb = new StringBuilder();
+
+            while ((rc = reader.read(buffer)) != -1)
+                sb.append(buffer, 0, rc);
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return sb.toString();
     }

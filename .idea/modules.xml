@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/SMMParser.iml" filepath="$PROJECT_DIR$/SMMParser.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/parse_members/parse_members.iml" filepath="$PROJECT_DIR$/parse_members/parse_members.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/threads/threads.iml" filepath="$PROJECT_DIR$/common/threads/threads.iml" />
       <module fileurl="file://$PROJECT_DIR$/top_groups/top_groups.iml" filepath="$PROJECT_DIR$/top_groups/top_groups.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/vk_api/vk_api.iml" filepath="$PROJECT_DIR$/common/vk_api/vk_api.iml" />

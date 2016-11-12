@@ -19,4 +19,14 @@ public class utils_t {
 
         return out;
     }
+
+    /**
+     * COmpare two dates
+     * @param date1
+     * @param date2
+     * @return - 0 if date1 equals to date2, 1 if date1 < date2, 2 if date1 > date2
+     */
+    static int compare_dates( List<Integer> date1, List<Integer> date2 ){
+
+    }
 }
